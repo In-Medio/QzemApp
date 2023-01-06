@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:QzemApp.ViewModels"
+             xmlns:behaviors="clr-namespace:QzemApp.Behaviors"
+             x:DataType="viewmodels:DimonaOverviewViewModel"
+             x:Class="QzemApp.Views.DimonaOverviewPage"
+             Title="Overview">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False" IsEnabled="False" />
+    </Shell.BackButtonBehavior>
+
+    <ContentPage.Resources>
+        <Style x:Key="Date_Picker" TargetType="DatePicker">
+            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource Secondary}}" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Format" Value="d MMMM yyyy" />
+            <Setter Property="Margin" Value="20,20" />
+        </Style>
+
+        <Style x:Key="Dimona_View" TargetType="ListView">
+            <Setter Property="ItemsSource" Value="{Binding ContractsByDate}" />
+            <Setter Property="Margin" Value="0,0,20,0" />
+            <Setter Property="SeparatorVisibility" Value="None" />
+            <Setter Property="SelectionMode" Value="None" />
+        </Style>
+
+        <Style x:Key="Name_Label" TargetType="Label">
+            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource Secondary}}" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontFamily" Value="OpenSansRegular" />
+            <Setter Property="Margin" Value="20,15,-15,0" />
+        </Style>
+
+        <Style x:Key="Logout_Button" TargetType="Button">
+            <Setter Property="Text" Value="Logout" />
+            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource Secondary}}" />
+            <Setter Property="BackgroundColor" Value="{DynamicResource Primary}" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="FontFamily" Value="OpenSansRegular" />
+            <Setter Property="Margin" Value="20,20" />
+        </Style>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <DatePicker Style="{StaticResource Date_Picker}" Date="{Binding SelectedDate}">
+                <DatePicker.Behaviors>
+                    <behaviors:EventToCommandBehavior
+                        EventName="DateSelected"
+                        Command="{Binding OnDateSelectedCommand}"
+                        EventArgsConverter="{StaticResource DateSelectedConverter}" />
+                </DatePicker.Behaviors>
+            </DatePicker>
+
+            <ListView Style="{StaticResource Dimona_View}">
+                <ListView.Behaviors>
+                    <behaviors:EventToCommandBehavior
+                        EventName="ItemTapped"
+                        Command="{Binding GetContractDetailsCommand}"
+                        EventArgsConverter="{StaticResource ItemTappedConverter}" />
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Style="{StaticResource Name_Label}" Text="{Binding Id}" IsVisible="false" />
+                                <Label Style="{StaticResource Name_Label}" Text="{Binding WorkerFirstName}" />
+                                <Label Style="{StaticResource Name_Label}" Text="{Binding WorkerName}" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+           
+            <Button Style="{StaticResource Logout_Button}" Command="{Binding OnLogOutCommand}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

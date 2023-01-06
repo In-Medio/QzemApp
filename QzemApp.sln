@@ -1,0 +1,33 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 17.0.31611.283
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{244782bd-a976-45d1-835b-1865c5fc2b58}") = "QzemApp", "QzemApp\QzemApp.csproj", "{17E06F89-E5B4-496D-B722-6D8CD10161A5}"
+EndProject
+Project("{244782bd-a976-45d1-835b-1865c5fc2b58}") = "QzemApp.UnitTests", "QzemApp.UnitTests\QzemApp.UnitTests.csproj", "{AA87D942-BAEC-477C-9A47-BB224FC55943}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{17E06F89-E5B4-496D-B722-6D8CD10161A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17E06F89-E5B4-496D-B722-6D8CD10161A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17E06F89-E5B4-496D-B722-6D8CD10161A5}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{17E06F89-E5B4-496D-B722-6D8CD10161A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17E06F89-E5B4-496D-B722-6D8CD10161A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17E06F89-E5B4-496D-B722-6D8CD10161A5}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{AA87D942-BAEC-477C-9A47-BB224FC55943}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA87D942-BAEC-477C-9A47-BB224FC55943}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA87D942-BAEC-477C-9A47-BB224FC55943}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA87D942-BAEC-477C-9A47-BB224FC55943}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {61F7FB11-1E47-470C-91E2-47F8143E1572}
+	EndGlobalSection
+EndGlobal
