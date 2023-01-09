@@ -47,7 +47,7 @@ public class LoginViewModel : ViewModelBase
         set => SetProperty(ref _password, value);
     }
 
-    private async Task OnLoginAsync()
+    public async Task OnLoginAsync()
     {
         await IsBusyFor(
             async () =>

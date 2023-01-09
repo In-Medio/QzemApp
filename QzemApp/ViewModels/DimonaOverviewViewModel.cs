@@ -22,7 +22,7 @@ public class DimonaOverviewViewModel : ViewModelBase
     private int _id;
     private string _workerFirstName;
     private string _workerName;
-    private ObservableCollection<ContractDimonaResponse> _contractsByDate;
+    private ObservableCollection<ContractDimonaResponse> _contracts;
     private DateTime _selectedDate;
 
     public ICommand OnDateSelectedCommand { get; }
@@ -30,8 +30,8 @@ public class DimonaOverviewViewModel : ViewModelBase
     public ICommand OnLogOutCommand { get; }
 
     public DimonaOverviewViewModel(IContractService contractService,
-        INavigationService navigationService,
         IDialogService dialogService,
+        INavigationService navigationService,
         ISettingsService settingsService)
     {
         _contractService = contractService;
@@ -45,7 +45,7 @@ public class DimonaOverviewViewModel : ViewModelBase
 
         OnLogOutCommand = new AsyncRelayCommand(OnLogOutAsync);
 
-        ContractsByDate = new ObservableCollection<ContractDimonaResponse>();
+        Contracts = new ObservableCollection<ContractDimonaResponse>();
 
         if (DateTime.Now.Hour < 12)
         {
@@ -78,10 +78,10 @@ public class DimonaOverviewViewModel : ViewModelBase
         set => SetProperty(ref _workerName, value);
     }
 
-    public ObservableCollection<ContractDimonaResponse> ContractsByDate
+    public ObservableCollection<ContractDimonaResponse> Contracts
     {
-        get => _contractsByDate;
-        set => SetProperty(ref _contractsByDate, value);
+        get => _contracts;
+        set => SetProperty(ref _contracts, value);
 
     }
 
@@ -96,7 +96,7 @@ public class DimonaOverviewViewModel : ViewModelBase
         await OnDateSelectedAsync();
     }
 
-    private async Task OnDateSelectedAsync()
+    public async Task OnDateSelectedAsync()
     {
         await IsBusyFor(
             async () =>
@@ -104,10 +104,12 @@ public class DimonaOverviewViewModel : ViewModelBase
                 try
                 {
                     var date = SelectedDate.Year.ToString() + "-" + SelectedDate.Month.ToString("D2") + "-" + SelectedDate.Day.ToString("D2");
-                    var contracts = await _contractService.GetContractsByDate(date);
-                    ContractsByDate = (contracts.Where(contract => WorkerConstants.WorkerCodesAccepted
+
+                    Contracts = (await _contractService.GetContractsByDate(date))
+                        .Where(contract => WorkerConstants.WorkerCodesAccepted
                         .Contains(contract.WorkerCode.ToString()) &&
-                        contract.EndDate != null).OrderBy(x => x.WorkerName)).ToObservableCollection();
+                        contract.EndDate != null).OrderBy(x => x.WorkerName)
+                        .ToObservableCollection<ContractDimonaResponse>();
                 }
                 catch(HttpRequestException ex)
                 {
@@ -116,7 +118,7 @@ public class DimonaOverviewViewModel : ViewModelBase
             });
     }
 
-    private async Task GetContractDetailsAsync(ContractDimonaResponse selectedContract)
+    public async Task GetContractDetailsAsync(ContractDimonaResponse selectedContract)
     {
         var navigationParameter = new Dictionary<string, object>
         {
@@ -126,8 +128,10 @@ public class DimonaOverviewViewModel : ViewModelBase
         await _navigationService.NavigateToAsync("details", navigationParameter);
     }
 
-    private async Task OnLogOutAsync()
+    public async Task OnLogOutAsync()
     {
+        _settingsService.UserName = string.Empty;
+        _settingsService.Password = string.Empty;
         _settingsService.AuthToken = string.Empty;
         await _navigationService.PopAsync();
     }

@@ -84,7 +84,7 @@ public class DimonaDetailViewModel : ViewModelBase
         set => SetProperty(ref _endHour, value);
     }
 
-    private async Task OnSaveHoursAsync()
+    public async Task OnSaveHoursAsync()
     {
         await IsBusyFor(
             async () =>
