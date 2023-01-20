@@ -57,9 +57,7 @@ public class DimonaOverviewViewModel : ViewModelBase
         {
             SelectedDate = DateTime.Now.Date;
         }
-
-        _minDate = DateTime.Now.AddDays(-2);
-
+        
         InitializeAsync().GetAwaiter();
     }
 
@@ -93,12 +91,6 @@ public class DimonaOverviewViewModel : ViewModelBase
     {
         get => _selectedDate;
         set => SetProperty(ref _selectedDate, value);
-    }
-
-    public DateTime MinDate
-    {
-        get => _minDate;
-        private set => SetProperty(ref _minDate, value);
     }
 
     public override async Task InitializeAsync()

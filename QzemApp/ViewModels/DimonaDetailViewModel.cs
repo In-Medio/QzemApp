@@ -91,12 +91,21 @@ public class DimonaDetailViewModel : ViewModelBase
             {
                 try
                 {
-                    var contract = new ContractDimonaRequest();
-                    MapContractResponseToContractRequest(contract);
+                    var currentDay = DateTime.Now.Date;
+                    var date = Convert.ToDateTime(_date).Date;
+                    if (date < currentDay.AddDays(-2))
+                    {
+                        await _dialogService.ShowAlertAsync("Werkuren", "Dimona kan niet meer gewijzigd worden!", "OK");
+                    }
+                    else
+                    {
+                        var contract = new ContractDimonaRequest();
+                        MapContractResponseToContractRequest(contract);
 
-                    await _contractService.SaveContract(contract, false);
-                    await _dialogService.ShowAlertAsync("Werkuren", "Tijd opgeslagen.", "OK");
-                    await _navigationService.PopAsync();
+                        await _contractService.SaveContract(contract, false);
+                        await _dialogService.ShowAlertAsync("Werkuren", "Tijd opgeslagen.", "OK");
+                        await _navigationService.PopAsync();
+                    }
                 }
                 catch(HttpRequestException ex)
                 {
