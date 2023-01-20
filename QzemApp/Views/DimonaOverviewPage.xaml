@@ -45,7 +45,7 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <DatePicker Style="{StaticResource Date_Picker}" Date="{Binding SelectedDate}">
+            <DatePicker Style="{StaticResource Date_Picker}" Date="{Binding SelectedDate}" MinimumDate="{Binding MinDate}">
                 <DatePicker.Behaviors>
                     <behaviors:EventToCommandBehavior
                         EventName="DateSelected"
