@@ -1,5 +1,6 @@
 ﻿namespace QzemApp.Resources.Localization;
 
+[ContentProperty(nameof(Name))]
 public class TranslateExtension : IMarkupExtension<BindingBase>
 {
     public string Name { get; set; }
