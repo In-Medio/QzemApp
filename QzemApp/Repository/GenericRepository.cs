@@ -54,7 +54,6 @@ public class GenericRepository : IGenericRepository
             }
 
             throw new HttpRequestExceptionEx(responseMessage.StatusCode, jsonResult);
-
         }
         catch (Exception e)
         {
@@ -100,7 +99,6 @@ public class GenericRepository : IGenericRepository
             }
 
             throw new HttpRequestExceptionEx(responseMessage.StatusCode, jsonResult);
-
         }
         catch (Exception e)
         {
@@ -147,7 +145,6 @@ public class GenericRepository : IGenericRepository
             }
 
             throw new HttpRequestExceptionEx(responseMessage.StatusCode, jsonResult);
-
         }
         catch (Exception e)
         {
@@ -193,7 +190,6 @@ public class GenericRepository : IGenericRepository
             }
 
             throw new HttpRequestExceptionEx(responseMessage.StatusCode, jsonResult);
-
         }
         catch (Exception e)
         {
@@ -239,7 +235,6 @@ public class GenericRepository : IGenericRepository
             }
 
             throw new HttpRequestExceptionEx(responseMessage.StatusCode, jsonResult);
-
         }
         catch (Exception e)
         {

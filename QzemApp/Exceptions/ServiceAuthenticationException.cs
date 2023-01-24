@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace QzemApp.Exceptions;
+﻿namespace QzemApp.Exceptions;
 
 public class ServiceAuthenticationException : Exception
 {
